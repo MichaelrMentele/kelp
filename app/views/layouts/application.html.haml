@@ -1,0 +1,17 @@
+!!! 5
+%html(lang="en-US")
+  %head
+    %title Kelp
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true 
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true 
+    = csrf_meta_tags
+
+  %body
+    %header
+      = render 'shared/header'
+    %section.content.clearfix
+      = render 'shared/messages'
+      = yield
+    %footer
+      &copy 2016 Kelp
+
