@@ -1,0 +1,16 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      = link_to "Kelp", root_path, class: "navbar-brand"
+      - if current_user
+        %ul.nav.navbar-nav
+          %li= link_to "Businesses", businesses_path
+          %li= link_to "Profile"
+          %li.dropdown
+            %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
+              Welcome, USERNAME
+              %b.caret
+            %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
+              %li
+                = link_to "Account"
+                = link_to "Sign Out", logout_path, method: :post 
