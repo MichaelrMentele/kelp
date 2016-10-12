@@ -21,7 +21,6 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails'
   gem 'sqlite3'
 end
 
@@ -38,6 +37,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'fabrication'
   gem 'faker'
