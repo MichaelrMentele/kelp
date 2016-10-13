@@ -46,14 +46,19 @@ describe SessionsController do
     end
   end
 
-  describe "POST delete" do
+  describe "POST destroy" do
+    before do 
+      session[:user_id] = 1 
+      post :destroy
+    end
     it "clears the sessions" do 
-      
+      expect(session[:user_id]).to be_nil
     end
-    it "logs out the current user" do 
-
+    it "redirects to the login path" do 
+      expect(response).to redirect_to businesses_path
     end
-    it "redirects to the login path"
-    it "sets the notice"
+    it "sets the notice" do
+      expect(flash[:notice]).not_to be_nil
+    end
   end
 end
