@@ -1,5 +1,12 @@
 - flash.each do |name, msg|
-  %div(class="alert alert-#{name}")
+  - if name == 'errors'
+    - type = "danger"
+  - elsif name == 'notice'
+    - type = "success"
+  - else
+    - type = "info"
+  %div(class="alert alert-#{type}")
     %a.close(data-dismiss='alert')
-    &#215;
-    = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+      &#215;
+    %ul
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)

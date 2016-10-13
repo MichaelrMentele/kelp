@@ -1,37 +1,32 @@
 .section.profile.container
   .page-header.row
-    %h1
-      Douglas Hamilton
-    %small 
-      Authored 23 Reviews
+    .col-sm-8.col-sm-offset-2
+      %h1
+        = @user.username
+      %small 
+        = "Authored #{@user.reviews.count} Reviews"
   .personal-info
-    .row.well
-      .col-sm-3
-        %img(src="http://placehold.it/125x125")
-      .col-sm-6
-        %dl
-          %dt
-            About
-          %dd
-            I like to review different pet stores because I like cats.
-  .page-header.row
-    %h2
-      Reviews by Doug
-  .review.well
-    %h2 
-      %a Yolo bungee
-    %h2
-      Scary!
-      %small
-        1/5 Stars
-    %p
-      I went to yolo and they didn't have any cats.
-  .review.well
-    %h2
-      %a Yolo bungee
-    %h2
-      What a blast!
-      %small
-        5/5 Stars
-    %p
-      I went to yolo and they were like totatally safe. Would most def recommend bro.
+    .col-sm-8.col-sm-offset-2
+      .row.well
+        .col-sm-4
+          = image_tag @user.img_url
+        .col-sm-6
+          %dl
+            %dt
+              About
+            %dd
+              = @user.about
+  .col-sm-8.col-sm-offset-2
+    .page-header.row
+      %h2
+        Reviews by Doug
+    - @user.reviews.each do |review|
+      .review.well
+        %h2
+          = review.title ? review.title : "Review"
+          %h2 
+          = link_to "#{review.business.name}", business_path(review.business)
+          %small
+            = "#{review.rating}/5 Stars"
+        %p
+          = review.description

@@ -2,19 +2,12 @@
   .page-header.row
     %h1
       Businesses Under the Sea
-  .business.well
-    %a
-      %h2
-        1. Yolo Bungee
-    %small
-      4.3 Stars (221 Reviews)
-    %p
-      Extreme bungee jumping.
-  .business.well
-    %a
-      %h2
-        2. Fishing
-    %small
-      1 Stars (4003 Reviews)
-    %p
-      Cannabalism
+  - @businesses.each_with_index do |business, index|
+    .business.well
+      = link_to business_path(business) do
+        %h2
+          = "#{(index + 1)} #{business.name}"
+      %small
+        = meta(business)
+      %p
+        = business.description

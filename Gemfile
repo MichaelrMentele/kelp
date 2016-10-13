@@ -22,6 +22,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'sqlite3'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :development do
@@ -39,8 +41,6 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'fabrication'
-  gem 'faker'
   gem 'capybara'
   gem 'launchy'
 end
