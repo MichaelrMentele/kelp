@@ -2,6 +2,11 @@ require 'rails_helper'
 
 describe UsersController do
   describe "GET show" do
+    it "sets @user" do
+      user = Fabricate(:user)
+      get :show, id: user.id
+      expect(assigns(:user)).to be_instance_of(User)
+    end
   end
 
   describe "POST create" do
