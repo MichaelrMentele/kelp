@@ -2,15 +2,17 @@
   .container-fluid
     .navbar-header
       = link_to "Kelp", root_path, class: "navbar-brand"
-      - if current_user
-        %ul.nav.navbar-nav
-          %li= link_to "Businesses", businesses_path
-          %li= link_to "Profile"
+      %ul.nav.navbar-nav
+        %li= link_to "Businesses", businesses_path
+        - unless current_user
+          %li= link_to "Login", login_path
+          %li= link_to "Register", register_path
+        - if current_user
+          %li= link_to "Profile", user_path(current_user)
           %li.dropdown
-            %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-              Welcome, USERNAME
+            %a(href="" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false")
+              Welcome, #{current_user.username}
               %b.caret
             %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
               %li
-                = link_to "Account"
-                = link_to "Sign Out", logout_path, method: :post 
+                = link_to "Sign Out", logout_path, method: :post,  class: "dropdown-item"

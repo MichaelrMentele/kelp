@@ -2,15 +2,34 @@ require 'rails_helper'
 
 describe SessionsController do
   describe "GET new" do 
-    it "redirects to home if user is already signed in"
-    it "renders new if no current user"
+    context "user is signed in" do 
+      let(:user) { Fabricate(:user) }
+      before do 
+        session[:user_id] = user.id
+        get :new
+      end
+      it "redirects to businesses if user is already signed in" do
+        expect(response).to redirect_to businesses_path
+      end
+      it "set flash notice if user is already signed in" do 
+        expect(flash[:notice]).not_to be_nil
+      end
+    end
   end
 
-  describe "GET create" do 
+  describe "POST create" do 
     context "with valid credentials" do 
-      it "sets a user id in the session"
-      it "redirects to businesses path"
-      it "sets the notice"
+      let(:user) { Fabricate(:user) }
+      before { post :create, { email: user.email, password: user.password } }
+      it "sets a user id in the session" do
+        expect(session[:user_id]).to eq(user.id)
+      end
+      it "redirects to businesses path" do 
+        expect(response).to redirect_to businesses_path
+      end
+      it "sets the notice" do 
+        expect(flash[:notice]).not_to be_nil
+      end
     end
 
     context "with invalid credentials" do
@@ -21,7 +40,12 @@ describe SessionsController do
   end
 
   describe "POST delete" do
-    it "clears the sessions"
+    it "clears the sessions" do 
+      
+    end
+    it "logs out the current user" do 
+
+    end
     it "redirects to the login path"
     it "sets the notice"
   end
