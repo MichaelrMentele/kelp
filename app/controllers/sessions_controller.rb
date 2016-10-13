@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       redirect_to businesses_path
     else
       flash[:errors] = "Sorry, there is a problem with your information."
-      redirect_to login_path
+      render 'sessions/new'
     end
   end
 

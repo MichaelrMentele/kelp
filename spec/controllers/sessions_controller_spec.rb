@@ -18,8 +18,8 @@ describe SessionsController do
   end
 
   describe "POST create" do 
+    let(:user) { Fabricate(:user) }
     context "with valid credentials" do 
-      let(:user) { Fabricate(:user) }
       before { post :create, { email: user.email, password: user.password } }
       it "sets a user id in the session" do
         expect(session[:user_id]).to eq(user.id)
@@ -33,9 +33,16 @@ describe SessionsController do
     end
 
     context "with invalid credentials" do
-      it "does NOT set a user id in the session"
-      it "renders the new template"
-      it "sets the flass errors"
+      before { post :create, { email: user.email } }
+      it "does NOT set a user id in the session" do
+        expect(session[:user_id]).to be_nil
+      end
+      it "renders the new template" do
+        expect(response).to render_template 'sessions/new'
+      end
+      it "sets the flash errors" do 
+        expect(flash[:errors]).not_to be_nil
+      end
     end
   end
 
