@@ -21,8 +21,9 @@ end
 
 def add_and_validate_reviews(review_titles=['Great', 'Bad'])
   review_titles.each do |title|
-  fill_in('Review Title', with: title)
-  fill_in('Description', with: 'Blah blah')
-  click_button('Submit')
-  page.has_content?(title)
+    fill_in('Review Title', with: title)
+    fill_in('Description', with: 'Blah blah')
+    click_button('Submit')
+    page.has_content?(title)
+  end
 end
