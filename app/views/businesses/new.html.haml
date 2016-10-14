@@ -1,0 +1,17 @@
+%section.container
+  .business.well.row
+    .col-sm-6.col-sm-offset-3
+      = bootstrap_form_for @business do |f|
+        .row
+          %header
+            %h2(style="margin: 20px 0;") Add a Business?
+        .row
+          %fieldset
+            = f.text_field :name
+            = f.text_field :blurb, label: "Why do people care?"
+            = f.text_field :synopsis, label: "What do they do?"
+            = f.text_field :location, label: "Where are they?"
+            = f.text_area :description, label: "More Information"
+          %fieldset.actions.control-group
+            .controls.form-group
+              %input(type="submit" value="Submit" class="btn btn-default")
