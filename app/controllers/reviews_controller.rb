@@ -2,14 +2,16 @@ class ReviewsController < ApplicationController
   before_filter :require_user
 
   def create
-    business = Business.find(params[:business_id])
-    review = Review.new(review_params.merge!(user: current_user, business: business))
+    @business = Business.find(params[:business_id])
+  review = Review.new(review_params.merge!(user: current_user, business: @business))
     if review.save
       flash[:notice] = "Review created!"
+      redirect_to :back
     else
-      flash[:errors] = "I'm sorry, unable to create review."
+      flash.now[:errors] = "I'm sorry, unable to create review."
+      render 'businesses/show'
     end
-    redirect_to :back
+    
   end
 
   private

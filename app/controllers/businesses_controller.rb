@@ -14,8 +14,8 @@ class BusinessesController < ApplicationController
       flash[:notice] = "Business created!"
       redirect_to business_path(business)
     else
-      flash[:errors] = "Invalid inputs."
-      redirect_to new_business_path
+      flash.now[:errors] = "Invalid inputs."
+      render 'businesses/new'
     end
   end
 

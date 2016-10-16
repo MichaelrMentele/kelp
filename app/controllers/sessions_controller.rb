@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Welcome! You are now signed in."
       redirect_to businesses_path
     else
-      flash[:errors] = "Sorry, there is a problem with your information."
+      flash.now[:errors] = "Sorry, there is a problem with your information."
       render 'sessions/new'
     end
   end

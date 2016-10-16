@@ -42,8 +42,8 @@ describe BusinessesController do
       
     context "with invalid inputs" do
       before { post :create, { business: {name: "test"} } }
-      it "redirects to the new page" do
-        expect(response).to redirect_to new_business_path
+      it "renders the new page" do
+        expect(response).to render_template 'businesses/new'
       end
       it "does NOT create a new business" do
         expect(Business.count).to eq(0)

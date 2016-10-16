@@ -27,15 +27,17 @@ describe UsersController do
     end
 
     context "with invalid inputs" do
-      before { post :create, user: { email: "bob@bob.com" } }
+      before do
+        post :create, user: { email: "bob@bob.com" } 
+      end
       it "does not create a new user" do 
         expect(User.count).to eq(0)
       end
       it "sets flash errors" do 
         expect(flash[:errors]).to_not be_nil
       end
-      it "redirects to the register path" do 
-        expect(response).to redirect_to register_path
+      it "renders the register path" do 
+        expect(response).to render_template 'users/new'
       end
     end
   end

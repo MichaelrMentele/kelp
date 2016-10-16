@@ -6,8 +6,8 @@ class UsersController < ApplicationController
       flash[:notice] = "Congratz! You're registered. You can now leave reviews."
       redirect_to businesses_path
     else
-      flash[:errors] = "I'm sorry, there is something wrong with your information!"
-      redirect_to register_path
+      flash.now[:errors] = "I'm sorry, there is something wrong with your information!"
+      render 'users/new'
     end
   end
 

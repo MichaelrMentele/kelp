@@ -40,7 +40,7 @@ describe ReviewsController do
           expect(flash[:errors]).not_to be_nil
         end
         it "redirects to the show page for that business" do
-          expect(response).to redirect_to business_path(business)
+          expect(response).to render_template 'businesses/show'
         end
       end
     end
