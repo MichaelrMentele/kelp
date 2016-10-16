@@ -4,7 +4,7 @@ class Business < ActiveRecord::Base
   validates_presence_of :name, :blurb, :img_url, :synopsis, :location
 
   def average_rating
-    unless reviews.count == 0
+    if not reviews.count == 0
       avg = reviews.map(&:rating).sum / reviews.count.to_f
       sprintf("%.1f", avg)
     else
