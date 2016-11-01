@@ -36,7 +36,7 @@ describe BusinessesController do
         expect(Business.count).to eq(1)
       end
       it "sets the flash notice" do
-        expect(flash[:notice]).not_to be_nil
+        expect(flash[:success]).not_to be_nil
       end
     end
       
@@ -49,7 +49,7 @@ describe BusinessesController do
         expect(Business.count).to eq(0)
       end
       it "sets the flash error" do
-        expect(flash[:errors]).not_to be_nil
+        expect(flash[:danger]).not_to be_nil
       end
     end
   end

@@ -5,6 +5,4 @@ Fabricator(:business) do
   synopsis { Faker::Lorem.paragraph(1) }
   location { Faker::Lorem.paragraph(1) }
   description { Faker::Lorem.paragraph(1) }
-  discount { nil }
-  price { nil }
 end
