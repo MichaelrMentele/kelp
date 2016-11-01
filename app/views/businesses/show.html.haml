@@ -23,30 +23,11 @@
               Description
             %dd
               = @business.description
-    -# .row.well
-    -#   - if @business.sale?
-    -#     .col-sm-4(style="margin: 15px 0;")
-          
-    -#       = bootstrap_form_tag url: charges_path do 
-    -#         %header.row
-    -#           %h2(style="margin-left: 15px;") #{@business.discount}% Coupon for only #{number_to_currency(@business.price)}
-    -#         .row
-    -#           %p.alert-success(style="margin: 15px; padding: 4px;")
-    -#             That's right!
-    -#             #{@business.discount}% off your next purchase!
-    -#           = hidden_field "amount", @business.price
-    -#         .row
-    -#           %fieldset.actions.control-group.col-sm-8
-    -#             .controls.form-group
-    -#               %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_ZWMUvrkjz8pINiKAT8uociHm" data-amount="#{@business.price}" data-name="Kelp" data-description="#{@business.discount}% Off Coupon!" data-locale="auto")
-    -#         .row
-    -#           %p.alert-danger(style="margin: 15px; padding: 4px;")
-    -#             Act fast, it won't last long!
   .row  
     .col-sm-6
       .page-header
         %h2
-          Review this Business:
+          Review this Business
       .well
         = bootstrap_form_for [@business, @review] do |f|
           .row
@@ -58,6 +39,31 @@
             %fieldset.actions.control-group.col-sm-8
               .controls.form-group
                 %input(type="submit" value="Submit" class="btn btn-default")
+    .col-sm-6
+      .page-header
+        %h2
+          Buy a Coupon
+      .row
+        .well
+          - if @business.sale?
+            = bootstrap_form_tag url: charges_path do 
+              %header
+                %h2
+                  #{10}% Coupon for only #{number_to_currency(500)}
+              .row
+                %p.alert-success(style="margin: 15px; padding: 4px;")
+                  That's right!
+                  #{10}% off your next purchase!
+                = hidden_field "amount", 500
+              .row
+                %fieldset.actions.control-group.col-sm-8
+                  .controls.form-group
+                    %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_ZWMUvrkjz8pINiKAT8uociHm" data-amount="#{}" data-name="Kelp" data-description="#{}% Off Coupon!" data-locale="auto")
+              .row
+                %p.alert-danger(style="margin: 15px; padding: 4px;")
+                  Act fast, it won't last long!
+          - else
+            Nothing for sale at this time.
   .row
     .page-header
       %h2

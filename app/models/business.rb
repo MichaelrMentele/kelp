@@ -1,8 +1,13 @@
 class Business < ActiveRecord::Base
   has_many :reviews, -> { order(created_at: :desc) }
+  has_many :coupons
   belongs_to :owner, class_name: "User"
 
   validates_presence_of :name, :blurb, :img_url, :synopsis, :location
+
+  def sale?
+    coupons.count > 0
+  end
 
   def average_rating
     if not reviews.count == 0
