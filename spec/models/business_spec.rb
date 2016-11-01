@@ -7,5 +7,5 @@ describe Business do
   it { should validate_presence_of(:synopsis) }
   it { should validate_presence_of(:location) }
   it { is_expected.to have_many(:reviews).order(created_at: :desc) }
-  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:owner) }
 end

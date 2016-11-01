@@ -1,27 +1,28 @@
 .section.container
-  .page-header.row
-    %h1 
-      = @business.name
-      %small 
-        = meta(@business)
-  .business-info
-    .row.well
-      .col-sm-4
-        = image_tag(@business.img_url)
-      .col-sm-6
-        %dl
-          %dt
-            = "What is #{@business.name}?"
-          %dd
-            = @business.synopsis
-          %dt
-            = "Where is #{@business.name}?"
-          %dd
-            = @business.location
-          %dt 
-            Description
-          %dd
-            = @business.description
+  .row
+    .page-header.row
+      %h1 
+        = @business.name
+        %small 
+          = meta(@business)
+    .business-info
+      .row.well
+        .col-sm-4
+          = image_tag(@business.img_url)
+        .col-sm-6
+          %dl
+            %dt
+              = "What is #{@business.name}?"
+            %dd
+              = @business.synopsis
+            %dt
+              = "Where is #{@business.name}?"
+            %dd
+              = @business.location
+            %dt 
+              Description
+            %dd
+              = @business.description
     -# .row.well
     -#   - if @business.sale?
     -#     .col-sm-4(style="margin: 15px 0;")
@@ -41,23 +42,26 @@
     -#         .row
     -#           %p.alert-danger(style="margin: 15px; padding: 4px;")
     -#             Act fast, it won't last long!
-      .col-sm-8(style="margin: 15px 0;")
+  .row  
+    .col-sm-6
+      .page-header
+        %h2
+          Review this Business:
+      .well
         = bootstrap_form_for [@business, @review] do |f|
-          %header.row
-            %h2(style="margin-left: 15px;") Review this Business:
           .row
-            %fieldset.col-sm-8
-              .row
-                .col-sm-6
-                  = f.select :rating, options_for_business_reviews
+            %fieldset.col-sm-12
+              = f.select :rating, options_for_business_reviews
               = f.text_field :title, label: "Review Title"
               = f.text_area :description
+          .row
             %fieldset.actions.control-group.col-sm-8
               .controls.form-group
                 %input(type="submit" value="Submit" class="btn btn-default")
-  .page-header.row
-    %h2
-      Reviews for #{@business.name}
+  .row
+    .page-header
+      %h2
+        Reviews for #{@business.name}
   - @business.reviews.each do |review|
     .review.well
       %h2
