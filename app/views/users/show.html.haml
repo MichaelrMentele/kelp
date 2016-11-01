@@ -25,7 +25,7 @@
   -#       .sale-tag
   -#         Sale! 
   -#       #{business.discount}% Off!
-  - if current_user.vendor?
+  - if current_user.vendor? && @user.businesses.count > 0
     .user-businesses.row
       .col-sm-8.col-sm-offset-2
         .page-header.row
@@ -33,18 +33,19 @@
             Your Businesses
         - @user.businesses.each_with_index do |business, index|
           = render partial: 'vendor/businesses/business_listing', locals: { business: business, index: index}
-  .row              
-    .col-sm-8.col-sm-offset-2
-      .page-header.row
-        %h2
-          Reviews by You
-      - @user.reviews.each do |review|
-        .review.well
+  - if @user.reviews.count > 0
+    .row              
+      .col-sm-8.col-sm-offset-2
+        .page-header.row
           %h2
-            = review.title ? review.title : "Review"
-            %h2 
-            = link_to "#{review.business.name}", business_path(review.business)
-            %small
-              = "#{review.rating}/5 Stars"
-          %p
-            = review.description
+            Reviews by You
+        - @user.reviews.each do |review|
+          .review.well
+            %h2
+              = review.title ? review.title : "Review"
+              %h2 
+              = link_to "#{review.business.name}", business_path(review.business)
+              %small
+                = "#{review.rating}/5 Stars"
+            %p
+              = review.description
