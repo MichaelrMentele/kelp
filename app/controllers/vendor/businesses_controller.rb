@@ -7,7 +7,7 @@ class Vendor::BusinessesController < VendorsController
     @business = Business.new(business_params.merge!(owner_id: current_user.id, img_url: "http://placehold.it/175x175"))
     if @business.save
       flash[:success] = "Business created!"
-      redirect_to business_path(business)
+      redirect_to business_path(@business)
     else
       flash.now[:danger] = "Invalid inputs."
       render :new
