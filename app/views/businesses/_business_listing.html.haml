@@ -1,0 +1,16 @@
+.business.well
+  .row
+    .col-xs-9
+      = link_to business_path(business) do
+        %h2
+          = "#{(index + 1)} #{business.name}"
+      %small
+        = meta(business)
+      %p
+        = business.blurb
+    .col-xs-3
+      -# - if business.sale?
+      -#   = link_to business_path(business), class: "sale-item text-center" do
+      -#     .sale-tag
+      -#       Sale! 
+      -#     #{business.discount}% Off!

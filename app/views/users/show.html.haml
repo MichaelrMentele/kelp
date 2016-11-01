@@ -5,7 +5,7 @@
         = @user.username
       %small 
         = "Authored #{@user.reviews.count} Reviews"
-  .personal-info
+  .personal-info.row
     .col-sm-8.col-sm-offset-2
       .row.well
         .col-sm-6
@@ -15,18 +15,36 @@
             %dt
               About
             %dd
-              = @user.about
-  .col-sm-8.col-sm-offset-2
-    .page-header.row
-      %h2
-        Reviews by Doug
-    - @user.reviews.each do |review|
-      .review.well
+              %p= @user.about
+  -# .row 
+  -#   .page-header.row
+  -#     %h2
+  -#       Coupons
+  -#   - @user.coupons.each do |coupon|
+  -#     .coupon.col-xs-3
+  -#       .sale-tag
+  -#         Sale! 
+  -#       #{business.discount}% Off!
+  - if current_user.vendor?
+    .user-businesses.row
+      .col-sm-8.col-sm-offset-2
+        .page-header.row
+          %h2
+            Your Businesses
+        - @user.businesses.each_with_index do |business, index|
+          = render partial: 'vendor/businesses/business_listing', locals: { business: business, index: index}
+  .row              
+    .col-sm-8.col-sm-offset-2
+      .page-header.row
         %h2
-          = review.title ? review.title : "Review"
-          %h2 
-          = link_to "#{review.business.name}", business_path(review.business)
-          %small
-            = "#{review.rating}/5 Stars"
-        %p
-          = review.description
+          Reviews by You
+      - @user.reviews.each do |review|
+        .review.well
+          %h2
+            = review.title ? review.title : "Review"
+            %h2 
+            = link_to "#{review.business.name}", business_path(review.business)
+            %small
+              = "#{review.rating}/5 Stars"
+          %p
+            = review.description

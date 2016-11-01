@@ -1,5 +1,6 @@
 class Business < ActiveRecord::Base
   has_many :reviews, -> { order(created_at: :desc) }
+  belongs_to :owner, class_name: "User"
 
   validates_presence_of :name, :blurb, :img_url, :synopsis, :location
 

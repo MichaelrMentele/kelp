@@ -19,12 +19,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'stripe' # payment
+gem 'figaro' # sensitive data management
+
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'sqlite3'
   gem 'fabrication'
   gem 'faker'
+  gem 'launchy'
 end
 
 group :development do

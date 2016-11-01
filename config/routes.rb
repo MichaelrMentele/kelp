@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   get '/register', to: "users#new"
   resources :users, only: [:create, :show]
 
+  namespace :vendor do
+    resources :businesses, only: [:new, :edit, :update, :create]
+  end
+
+  resources :charges, only: [:create]
+
   resources :businesses, only: [:show, :index, :create, :new] do
     resources :reviews, only: [:create, :update]
   end

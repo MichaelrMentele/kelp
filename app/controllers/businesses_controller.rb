@@ -11,10 +11,10 @@ class BusinessesController < ApplicationController
   def create
     business = Business.new(business_params.merge!(img_url: "http://placehold.it/175x175"))
     if business.save
-      flash[:notice] = "Business created!"
+      flash[:success] = "Business created!"
       redirect_to business_path(business)
     else
-      flash.now[:errors] = "Invalid inputs."
+      flash.now[:danger] = "Invalid inputs."
       render 'businesses/new'
     end
   end

@@ -8,7 +8,9 @@
           %li= link_to "Login", login_path
           %li= link_to "Register", register_path
         - if current_user
-          %li= link_to "Add Business", new_business_path
+          %li= link_to "Add a Business", new_business_path
+          - if current_user.vendor?
+            %li= link_to "Add Your Business", new_vendor_business_path
           %li.dropdown
             %a(href="" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false")
               Welcome, #{current_user.username}

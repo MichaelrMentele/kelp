@@ -3,11 +3,4 @@
     %h1
       Businesses Under the Sea
   - @businesses.each_with_index do |business, index|
-    .business.well
-      = link_to business_path(business) do
-        %h2
-          = "#{(index + 1)} #{business.name}"
-      %small
-        = meta(business)
-      %p
-        = business.blurb
+    = render partial: 'businesses/business_listing', locals: { business: business, index: index}
