@@ -1,0 +1,17 @@
+.row
+  .col-sm-4.col-xs-offset-4.well
+    = bootstrap_form_for [:vendor, @business, @coupon] do |f|
+      .row
+        .col-xs-12
+          %h2(style="margin: 20px 0;") Create Coupons
+      .row
+        %fieldset.col-xs-12
+          = f.number_field :discount_percent, placeholder: 10
+          = f.number_field :price, label: "Price (dollars)", placeholder: 5
+          = f.text_area :description
+          = f.form_group :for_sale, label: { text: "Activate and set for Sale?" } do 
+            = f.radio_button :for_sale, true, label: "Yes"
+            = f.radio_button :for_sale, false, label: "No", checked: true
+        %fieldset.actions.control-group.col-xs-12
+          .controls.form-group
+            %input(type="submit" value="Submit" class="btn btn-default")

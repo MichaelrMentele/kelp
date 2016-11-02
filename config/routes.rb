@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   namespace :vendor do
     resources :businesses, only: [:new, :edit, :update, :create] do 
-      resources :coupons, only: [:create]
+      resources :coupons, only: [:create, :edit, :update]
     end
   end
 

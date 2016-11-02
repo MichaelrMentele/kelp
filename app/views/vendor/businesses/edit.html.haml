@@ -34,7 +34,9 @@
           #{@business.name}'s Coupons
       - @business.coupons.each do |coupon|
         .col-xs-4
-          .coupon.well
+          .coupon.well(style="position: relative;")
+            %small(style="float: right; position: absolute; top: 4px; right: 6px;")
+              = link_to "edit", edit_vendor_business_coupon_path(@business, coupon)
             .row
               %dl.col-xs-6
                 %dt Discount
@@ -48,5 +50,13 @@
               %dl.col-xs-12
                 %dt Description
                 %dd= coupon.description
+            .row
+              .col-xs-12
+                -if coupon.for_sale
+                  %h2(style="color: green;")
+                    Active
+                -else
+                  %h2(style="color: red;")
+                    Not Active
 
 

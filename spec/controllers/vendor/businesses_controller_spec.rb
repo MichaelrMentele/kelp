@@ -1,6 +1,20 @@
 require 'rails_helper'
 
-describe Vendor::BusinessesController do 
+describe Vendor::BusinessesController do
+  describe "PATCH update" do 
+     context "with valid changes" do 
+      it "sets @business"
+      it "updates @business"
+      it "redirects to the edit page"
+      it "sets a flash success message"
+    end
+
+    context "with invalid changes" do 
+      it "does not update @business"
+      it "renders the edit page"
+    end
+  end
+
   describe "POST create" do 
     context "current user is a vendor" do
       let(:alice) { Fabricate(:user, vendor: true) } 
