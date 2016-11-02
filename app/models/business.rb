@@ -9,6 +9,10 @@ class Business < ActiveRecord::Base
     coupons.count > 0
   end
 
+  def reviews?
+    reviews.count > 0
+  end
+
   def sale?
     coupons.where(for_sale: true).count > 0
   end
