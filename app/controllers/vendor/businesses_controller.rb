@@ -16,6 +16,7 @@ class Vendor::BusinessesController < VendorsController
 
   def edit
     @business = Business.find(params[:id])
+    @coupon = Coupon.new
   end
 
   def update

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show]
 
   namespace :vendor do
-    resources :businesses, only: [:new, :edit, :update, :create]
+    resources :businesses, only: [:new, :edit, :update, :create] do 
+      resources :coupons, only: [:create]
+    end
   end
 
   resources :charges, only: [:create]

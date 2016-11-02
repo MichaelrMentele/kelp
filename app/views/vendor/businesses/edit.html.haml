@@ -1,10 +1,10 @@
 %section.container
   .business.well.row
-    .col-sm-6.col-sm-offset-3
+    .col-sm-6.col-xs-offset-1
       = bootstrap_form_for [:vendor, @business] do |f|
         .row
           %header
-            %h2(style="margin: 20px 0;") Add your Business?
+            %h2(style="margin: 20px 0;") Edit Business Info
         .row
           %fieldset
             = f.text_field :name
@@ -15,3 +15,38 @@
           %fieldset.actions.control-group
             .controls.form-group
               %input(type="submit" value="Submit" class="btn btn-default")
+    .col-sm-3.col-xs-offset-1
+      = bootstrap_form_for [:vendor, @business, @coupon] do |f|
+        .row
+          %h2(style="margin: 20px 0;") Create Coupons
+        .row
+          %fieldset
+            = f.number_field :discount_percent, placeholder: 10
+            = f.number_field :price, label: "Price (dollars)", placeholder: 5
+            = f.text_area :description
+          %fieldset.actions.control-group
+            .controls.form-group
+              %input(type="submit" value="Submit" class="btn btn-default")
+  .row
+    - if @business.has_coupons?
+      .page-header
+        %h2
+          #{@business.name}'s Coupons
+      - @business.coupons.each do |coupon|
+        .col-xs-4
+          .coupon.well
+            .row
+              %dl.col-xs-6
+                %dt Discount
+                %dd
+                  = "#{coupon.discount_percent}%"
+              %dl.col-xs-6
+                %dt Price
+                %dd
+                  = number_to_currency(coupon.price)
+            .row
+              %dl.col-xs-12
+                %dt Description
+                %dd= coupon.description
+
+

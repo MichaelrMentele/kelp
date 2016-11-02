@@ -74,4 +74,44 @@ describe Vendor::BusinessesController do
       end
     end
   end
+
+  describe "GET edit" do 
+    context "current user is a vendor and edits their business" do 
+      let(:alice) { Fabricate(:user, vendor: true) }
+      let(:yolo_bungee) { Fabricate(:business, owner: alice) }
+      before do
+        set_current_user(alice)
+        get :edit, id: yolo_bungee.id
+      end
+
+      it "sets @business" do
+        expect(assigns(:business)).to be_present
+      end
+
+      it "sets @coupon" do 
+        expect(assigns(:coupon)).to be_present
+      end
+
+      it "renders the edit business page" do 
+        expect(response).to render_template "businesses/new"
+      end
+    end
+
+    context "current user is NOT a vendor and tries to edit someone elses business" do
+      let(:alice) { Fabricate(:user, vendor: false) }
+      let(:bob) { Fabricate(:user, vendor: true) }
+      let(:yolo_bungee) { Fabricate(:business, owner: bob) }
+      before { set_current_user(alice) }
+
+      it "redirects the user to the businesses path" do 
+        get :edit, id: yolo_bungee.id
+        expect(response).to redirect_to businesses_path
+      end
+
+      it "it sets the flash warning" do 
+        get :edit, id: yolo_bungee.id
+        expect(flash[:warning]).to be_present
+      end
+    end
+  end
 end
