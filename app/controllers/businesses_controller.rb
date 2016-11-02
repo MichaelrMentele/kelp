@@ -1,7 +1,11 @@
 class BusinessesController < ApplicationController
 
   def index
-    @businesses = Business.all
+    if params[:sales] == "true"
+      @businesses = Business.active_sale_all
+    else
+      @businesses = Business.all
+    end
   end 
 
   def new

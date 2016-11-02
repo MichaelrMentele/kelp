@@ -19,7 +19,7 @@ class ChargesController < ApplicationController
       redirect_to :back
     rescue Stripe::CardError => e 
       flash[:danger] = e.message
-      render 'businesses/#{params[:id]}'
+      render 'businesses/show'
     end
   end
 end

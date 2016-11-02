@@ -13,6 +13,12 @@ class Business < ActiveRecord::Base
     reviews.count > 0
   end
 
+  def self.active_sale_all
+    all.select do |business|
+      business.sale?
+    end
+  end
+
   def sale?
     coupons.where(for_sale: true).count > 0
   end
