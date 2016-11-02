@@ -43,10 +43,10 @@
       .page-header
         %h2
           Buy a Coupon
-      .row
-        .well
-          - if @business.sale?
-            - @business.coupons.each do |coupon|
+      .row 
+        - if @business.sale?
+          - @business.coupons.each do |coupon|
+            .well
               = bootstrap_form_tag url: charges_path do 
                 %header
                   %h2
@@ -62,8 +62,8 @@
               .row
                 %p.alert-danger(style="margin: 15px; padding: 4px;")
                   Act fast, it won't last long!
-          - else
-            Nothing for sale at this time.
+        - else
+          Nothing for sale at this time.
   - if @business.reviews?
     .row
       .page-header

@@ -21,7 +21,8 @@ class Vendor::BusinessesController < VendorsController
 
   def update
     @business = Business.find(params[:id])
-    if @business.update_attributes!(business_params)
+    @coupon = Coupon.new
+    if @business.update_attributes(business_params)
       flash[:success] = "Changes have been saved."
       redirect_to user_path(current_user)
     else

@@ -1,13 +1,14 @@
 class Vendor::CouponsController < VendorsController
   def create
     @coupon = Coupon.new(coupon_params.merge!(business_id: params[:business_id]))
+    @business = Business.find(params[:business_id])
     if @coupon.save
-      flash[:success] = "Coupon created! These are already for sale."
+      flash[:success] = "Coupon created! Edit to activate for sale."
       redirect_to :back
     else
-      flash.now[:danger] = "Missing coupon information."
-      @business = Business.find(params[:business_id])
-      render '/vendor/businesses/edit'
+      flash[:danger] = "Missing coupon information."
+      @coupon.price = to_dollars(@coupon.price)
+      redirect_to edit_vendor_business_path(@business)
     end
   end
 
@@ -31,6 +32,15 @@ class Vendor::CouponsController < VendorsController
   private
 
   def coupon_params
+    params['coupon']['price'] = to_cents(params['coupon']['price'])
     params.require(:coupon).permit(:discount_percent, :price, :description, :for_sale)
+  end
+
+  def to_cents(dollars)
+    dollars.to_i * 100
+  end
+
+  def to_dollars(cents)
+    cents.to_i / 100
   end
 end

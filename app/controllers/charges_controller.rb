@@ -14,6 +14,7 @@ class ChargesController < ApplicationController
         :description => 'Rails Stripe customer',
         :currency    => 'usd'
       )
+      # Right now the user doesn't actually get anything. But this is a toy app anyway.
       flash[:success] = "Your purchase is complete!"
       redirect_to :back
     rescue Stripe::CardError => e 

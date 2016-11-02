@@ -1,8 +1,6 @@
 - flash.each do |name, msg|
-  - if name == 'errors'
-    - type = "danger"
-  - elsif name == 'notice'
-    - type = "success"
+  - if name == 'danger' || name == 'success' || name == 'warning'
+    - type = name
   - else
     - type = "info"
   %div(class="alert alert-#{type}")
