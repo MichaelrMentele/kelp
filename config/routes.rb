@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :relationships, only: [:create]
+
   resources :charges, only: [:create]
 
   resources :businesses, only: [:show, :index, :create, :new] do

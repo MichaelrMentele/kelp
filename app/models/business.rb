@@ -1,5 +1,6 @@
 class Business < ActiveRecord::Base
-  has_many :relationships, as: :followable
+  has_many :leading_relationships, as: :followable
+  has_many :leading_relationships, class_name: "Relationship", foreign_key: :followable_id, as: :followable
   has_many :reviews, -> { order(created_at: :desc) }
   has_many :coupons
   belongs_to :owner, class_name: "User"

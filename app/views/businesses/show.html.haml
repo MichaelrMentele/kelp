@@ -1,10 +1,13 @@
 .section.container
   .row
     .page-header.row
-      %h1 
-        = @business.name
-        %small 
-          = meta(@business)
+      .col-xs-9
+        %h1 
+          = @business.name
+          %small 
+            = meta(@business)
+      .col-xs-3
+        = link_to "Follow", relationships_path(relationship: { followable_type: "Business", followable_id: @business.id}), method: "post", class: "btn btn-default pull-right"
     .business-info
       .row.well
         .col-sm-4
