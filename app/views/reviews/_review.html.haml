@@ -1,0 +1,9 @@
+.review.well
+  %h2
+    = review.title ? review.title : "Review"
+    %small
+      = "#{review.rating}/5 Stars"
+  %small
+    = link_to "by #{review.user.username}", user_path(review.user)
+  %p
+    = review.description

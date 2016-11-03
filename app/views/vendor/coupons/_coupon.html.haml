@@ -1,0 +1,32 @@
+.col-xs-4
+  .coupon.well(style="position: relative;")
+    - if context == "business"
+      %small(style="float: right; position: absolute; top: 4px; right: 6px;")
+        = link_to "edit", edit_vendor_business_coupon_path(@business, coupon)
+    .row
+      %dl.col-xs-6
+        %dt Discount
+        %dd
+          = "#{coupon.discount_percent}%"
+      %dl.col-xs-6
+        %dt Price
+        %dd
+          = number_to_currency(coupon.price_in_dollars)
+    .row
+      %dl.col-xs-12
+        %dt Description
+        %dd= coupon.description
+    - if context == "business"
+      .row
+        .col-xs-12
+          -if coupon.for_sale
+            %h2(style="color: green;")
+              Active
+          -else
+            %h2(style="color: red;")
+              Not Active
+    - elsif context == "purchaser"
+      .row
+        .col-xs-12
+          %hr
+          %p Coupon valid only at #{coupon.business.name}

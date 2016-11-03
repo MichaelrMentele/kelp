@@ -1,0 +1,15 @@
+.well
+  = bootstrap_form_tag url: charges_path(amount: coupon.price_in_cents, coupon_id: coupon.id) do 
+    %header
+      %h2
+        #{coupon.discount_percent}% Coupon for only #{number_to_currency(coupon.price_in_dollars)}
+    .row
+      %p.alert-warning(style="margin: 15px; padding: 4px;")
+        = coupon.description
+    .row
+      %fieldset.actions.control-group.col-sm-8
+        .controls.form-group
+          %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_ZWMUvrkjz8pINiKAT8uociHm" data-amount="#{coupon.price_in_cents}" data-name="Kelp" data-description="Coupon purchase for #{@business.name}" data-locale="auto")
+  .row
+    %p.alert-danger(style="margin: 15px; padding: 4px;")
+      Act fast, it won't last long!

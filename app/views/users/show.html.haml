@@ -16,15 +16,14 @@
               About
             %dd
               %p= @user.about
-  -# .row 
-  -#   .page-header.row
-  -#     %h2
-  -#       Coupons
-  -#   - @user.coupons.each do |coupon|
-  -#     .coupon.col-xs-3
-  -#       .sale-tag
-  -#         Sale! 
-  -#       #{business.discount}% Off!
+  - if @user.has_coupons?
+    .row 
+      .col-sm-8.col-sm-offset-2
+        .page-header.row
+          %h2
+            Coupons
+        - @user.coupons.each do |coupon|
+          = render partial: 'vendor/coupons/coupon', locals: { coupon: coupon, context: 'purchaser'}
   - if current_user.vendor? && @user.businesses.count > 0
     .user-businesses.row
       .col-sm-8.col-sm-offset-2
@@ -33,7 +32,7 @@
             Your Businesses
         - @user.businesses.each_with_index do |business, index|
           = render partial: 'vendor/businesses/business_listing', locals: { business: business, index: index}
-  - if @user.reviews.count > 0
+  - if @user.has_reviews?
     .row              
       .col-sm-8.col-sm-offset-2
         .page-header.row

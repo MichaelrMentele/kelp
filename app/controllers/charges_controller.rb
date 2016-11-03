@@ -1,6 +1,7 @@
 class ChargesController < ApplicationController
   def create
-    @amount = params[:amount]
+    binding.pry
+    @amount = params[:amount].to_i
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
@@ -14,8 +15,8 @@ class ChargesController < ApplicationController
         :description => 'Rails Stripe customer',
         :currency    => 'usd'
       )
-      # Right now the user doesn't actually get anything. But this is a toy app anyway.
       flash[:success] = "Your purchase is complete!"
+      current_user.coupons << Coupon.find(params[:coupon_id])
       redirect_to :back
     rescue Stripe::CardError => e 
       flash[:danger] = e.message

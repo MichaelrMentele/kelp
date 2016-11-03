@@ -46,22 +46,7 @@
       .row 
         - if @business.sale?
           - @business.coupons.each do |coupon|
-            .well
-              = bootstrap_form_tag url: charges_path do 
-                %header
-                  %h2
-                    #{coupon.discount_percent}% Coupon for only #{number_to_currency(coupon.price)}
-                .row
-                  %p.alert-warning(style="margin: 15px; padding: 4px;")
-                    = coupon.description
-                  = hidden_field "amount", coupon.price
-                .row
-                  %fieldset.actions.control-group.col-sm-8
-                    .controls.form-group
-                      %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_ZWMUvrkjz8pINiKAT8uociHm" data-amount="#{coupon.price}" data-name="Kelp" data-description="Coupon purchase for #{@business.name}" data-locale="auto")
-              .row
-                %p.alert-danger(style="margin: 15px; padding: 4px;")
-                  Act fast, it won't last long!
+            = render partial: "/vendor/coupons/coupon_chargable", locals: { coupon: coupon }
         - else
           Nothing for sale at this time.
   - if @business.reviews?
@@ -70,12 +55,4 @@
         %h2
           Reviews for #{@business.name}
     - @business.reviews.each do |review|
-      .review.well
-        %h2
-          = review.title ? review.title : "Review"
-          %small
-            = "#{review.rating}/5 Stars"
-        %small
-          = link_to "by #{review.user.username}", user_path(review.user)
-        %p
-          = review.description
+      = render partial: "/reviews/review", locals: { review: review }
