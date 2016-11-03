@@ -143,7 +143,7 @@ describe Vendor::CouponsController do
       end
 
       it "renders the business edit page" do 
-        expect(response).to render_template 'vendor/businesses/edit'
+        expect(response).to redirect_to edit_vendor_business_path(yolo_bungee)
       end
     end
   end
