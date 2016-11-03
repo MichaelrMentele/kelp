@@ -1,6 +1,5 @@
 class ChargesController < ApplicationController
   def create
-    binding.pry
     @amount = params[:amount].to_i
 
     customer = Stripe::Customer.create(
