@@ -1,10 +1,12 @@
 .section.profile.container
   .page-header.row
-    .col-sm-8.col-sm-offset-2
+    .col-sm-6.col-sm-offset-2
       %h1
         = @user.username
       %small 
         = "Authored #{@user.reviews.count} Reviews"
+    .col-xs-2
+      = render partial: 'relationships/follow', locals: { obj: @user }
   .personal-info.row
     .col-sm-8.col-sm-offset-2
       .row.well
@@ -16,28 +18,44 @@
               About
             %dd
               %p= @user.about
+  - if @user.following_reviewers?
+    .row 
+      .col-sm-8.col-sm-offset-2
+        .page-header.row
+          %h2
+            Reviewers User is Following
+        - @user.watched_reviewers.each do |reviewer|
+          = render partial: 'users/reviewer', locals: { reviewer: reviewer }
+  - if @user.following_businesses?
+    .row 
+      .col-sm-8.col-sm-offset-2
+        .page-header.row
+          %h2
+            Businesses User is Following
+        - @user.watched_businesses.each_with_index do |business, index|
+          = render partial: 'businesses/business_listing', locals: { business: business, index: index }
   - if @user.has_coupons?
     .row 
       .col-sm-8.col-sm-offset-2
         .page-header.row
           %h2
-            Coupons
+            User Coupons
         - @user.coupons.each do |coupon|
           = render partial: 'vendor/coupons/coupon', locals: { coupon: coupon, context: 'purchaser'}
   - if current_user.vendor? && @user.businesses.count > 0
-    .user-businesses.row
+    .row
       .col-sm-8.col-sm-offset-2
         .page-header.row
           %h2
-            Your Businesses
+            User Owned Businesses
         - @user.businesses.each_with_index do |business, index|
-          = render partial: 'vendor/businesses/business_listing', locals: { business: business, index: index}
+          = render partial: 'vendor/businesses/owned_business_listing', locals: { business: business, index: index}
   - if @user.has_reviews?
     .row              
       .col-sm-8.col-sm-offset-2
         .page-header.row
           %h2
-            Reviews by You
+            User Reviews
         - @user.reviews.each do |review|
           .review.well
             %h2

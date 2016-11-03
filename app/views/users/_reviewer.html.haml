@@ -1,0 +1,6 @@
+.col-xs-4
+  .well
+    = link_to user_path(reviewer) do 
+      %h2
+        = "#{reviewer.username}"
+    %img(src="#{reviewer.img_url}")

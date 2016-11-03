@@ -7,7 +7,7 @@
           %small 
             = meta(@business)
       .col-xs-3
-        = link_to "Follow", relationships_path(relationship: { followable_type: "Business", followable_id: @business.id}), method: "post", class: "btn btn-default pull-right"
+        = render partial: 'relationships/follow', locals: { obj: @business }
     .business-info
       .row.well
         .col-sm-4

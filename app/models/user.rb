@@ -14,6 +14,26 @@ class User < ActiveRecord::Base
     vendor
   end
 
+  def watched_reviewers
+    following_relationships.where(followable_type: "User").map(&:followable)
+  end
+
+  def watched_businesses
+    following_relationships.where(followable_type: "Business").map(&:followable)
+  end
+
+  def following_reviewers?
+    watched_reviewers.count > 0
+  end
+
+  def following_businesses?
+    watched_businesses.count > 0
+  end
+
+  def follows?(followable)
+    !!following_relationships.find_by(followable_id: followable.id, followable_type: followable.class.name)
+  end
+
   def has_coupons?
     coupons.count > 0
   end

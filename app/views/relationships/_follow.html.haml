@@ -1,0 +1,8 @@
+- unless current_user.follows?(obj)
+  = bootstrap_form_for Relationship.new do |f|
+    = f.hidden_field :followable_type, value: obj.class.name
+    = f.hidden_field :followable_id, value: obj.id
+    .row
+      %fieldset.actions.control-group
+        .controls.form-group
+          %input(type="submit" value="Follow" class="btn btn-default pull-right")
