@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :relationships
+  has_many :relationships, as: :followable
   has_many :reviews
   has_many :businesses, foreign_key: "owner_id"
   has_many :coupons
