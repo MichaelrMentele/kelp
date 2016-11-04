@@ -24,8 +24,9 @@ class Vendor::BusinessesController < VendorsController
     @coupon = Coupon.new
     if @business.update_attributes(business_params)
       flash[:success] = "Changes have been saved."
-      redirect_to user_path(current_user)
+      redirect_to edit_vendor_business_path(current_user)
     else
+      flash.now[:danger]
       render :edit
     end
   end

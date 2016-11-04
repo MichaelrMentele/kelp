@@ -51,7 +51,8 @@
           - @business.coupons.each do |coupon|
             = render partial: "/vendor/coupons/coupon_chargable", locals: { coupon: coupon }
         - else
-          Nothing for sale at this time.
+          .well
+            Nothing for sale at this time.
   - if @business.reviews?
     .row
       .page-header

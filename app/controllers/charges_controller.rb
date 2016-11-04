@@ -14,8 +14,10 @@ class ChargesController < ApplicationController
         :description => 'Rails Stripe customer',
         :currency    => 'usd'
       )
+
       flash[:success] = "Your purchase is complete!"
       current_user.coupons << Coupon.find(params[:coupon_id])
+      
       redirect_to :back
     rescue Stripe::CardError => e 
       flash[:danger] = e.message

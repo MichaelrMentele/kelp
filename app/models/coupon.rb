@@ -1,5 +1,6 @@
 class Coupon < ActiveRecord::Base
   belongs_to :business
+  belongs_to :user
 
   validates :price, numericality: { only_integer: true, greater_than: 49 }
   validates :discount_percent, numericality: {only_integer: true, less_than: 100 }
