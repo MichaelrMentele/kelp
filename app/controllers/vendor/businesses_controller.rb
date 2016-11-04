@@ -26,7 +26,7 @@ class Vendor::BusinessesController < VendorsController
       flash[:success] = "Changes have been saved."
       redirect_to edit_vendor_business_path(current_user)
     else
-      flash.now[:danger]
+      flash.now[:danger] = "Your changes are invalid."
       render :edit
     end
   end

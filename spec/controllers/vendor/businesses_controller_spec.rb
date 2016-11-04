@@ -29,8 +29,10 @@ describe Vendor::BusinessesController do
 
     context "with invalid changes" do 
       let!(:yolo_bungee) { Fabricate(:business) }  
+      let(:alice) { Fabricate(:user, vendor: true) } 
       before do 
-        patch :update, id: yolo_bungee.id, business: {}
+        set_current_user(alice)
+        patch :update, id: yolo_bungee.id, business: { name: "" }
       end
 
       it "does not update @business" do 
@@ -38,11 +40,11 @@ describe Vendor::BusinessesController do
       end
 
       it "sets a flash error message" do 
-        expect(flash[:danger]).to be_present
+        expect(flash.now[:danger]).to be_present
       end
 
       it "renders the edit page" do 
-        expect(response).to render_template 'businesses/edit'
+        expect(response).to render_template 'vendor/businesses/edit'
       end
     end
   end
