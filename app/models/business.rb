@@ -3,7 +3,7 @@ class Business < ActiveRecord::Base
   has_many :leading_relationships, class_name: "Relationship", foreign_key: :followable_id, as: :followable
   has_many :reviews, -> { order(created_at: :desc) }
   has_many :coupons
-  belongs_to :owner, class_name: "User"
+  belongs_to :owner, class_name: "User", foreign_key: :owner_id
 
   validates_presence_of :name, :blurb, :img_url, :synopsis, :location
 
