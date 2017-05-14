@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "vendor can own a business" do 
+feature "vendor can own a business" do
   scenario "can create a business" do
     alice = Fabricate(:user, vendor: true)
     sign_in(alice)
@@ -16,9 +16,9 @@ feature "vendor can own a business" do
     click_button "Submit"
     sleep 1
 
-    
+
   end
 
-  scenario "can view and edit their business" do 
-  end
+  scenario "can view and edit their business"
+  scenario "can create a coupon"
 end
